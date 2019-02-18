@@ -26,6 +26,29 @@ public class RestClient {
 		webTarget = client.target(uri);
 	}
 
+	public void getWeatherForecast(String city) {
+		WebTarget target = webTarget.path("data").path("2.5").path("weather").queryParam("q", city).queryParam("units","metric").queryParam("APPID", APPID);
+		// Prepare HTTP GET request 
+		Builder builder = target.request();
+		// define accepted media types
+		builder.accept(MediaType.APPLICATION_JSON);
+		Response response = builder.get();
+		
+		String body = response.readEntity(String.class);
+		// for testing: print whole json in beautified format
+		//Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		//CurrentWeather currWeather = gson.fromJson(body, CurrentWeather.class);
+		//System.out.println(gson.toJson(currWeather));
+		
+		// create gson object
+		Gson gsonObj = new Gson();
+		// parse json string and load it into CurrentWeather class 
+		CurrentWeather currWeather = gsonObj.fromJson(body, CurrentWeather.class);
+		Gson gsonObj2 = new GsonBuilder().setPrettyPrinting().create();
+		System.out.println(gsonObj2.toJson(currWeather.getWeather().get(0)));
+		System.out.println(gsonObj2.toJson(currWeather.getMain()));
+    	}
+
 	public void getCurrentWeather(String city) {
 		WebTarget target = webTarget.path("data").path("2.5").path("weather").queryParam("q", city).queryParam("units","metric").queryParam("APPID", APPID);
 		// Prepare HTTP GET request 
