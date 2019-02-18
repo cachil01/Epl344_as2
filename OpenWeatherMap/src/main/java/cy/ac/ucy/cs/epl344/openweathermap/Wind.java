@@ -3,7 +3,7 @@ package cy.ac.ucy.cs.epl344.openweathermap;
 public class Wind {
 
 	private float speed;
-	private int deg;
+	private double deg;
 
 	public float getSpeed() {
     		return speed;
@@ -13,11 +13,11 @@ public class Wind {
    		 this.speed = speed;
 	}
 
-	public int getDeg() {
+	public double getDeg() {
                 return deg;
         }
 
-        public void setDeg(int deg) {
+        public void setDeg(double deg) {
                  this.deg = deg;
         }
 }

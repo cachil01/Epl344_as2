@@ -3,7 +3,7 @@ package cy.ac.ucy.cs.epl344.openweathermap;
 public class Main {
 
 	private float temp;
-	private int pressure;
+	private double pressure;
 	private int humidity;
 	private float temp_min;
 	private float temp_max;
@@ -16,11 +16,11 @@ public class Main {
 		this.temp = temp;
 	}
 
-	public int getPressure() {
+	public double getPressure() {
                 return pressure;
         }
 
-        public void setPressure(int pressure) {
+        public void setPressure(double pressure) {
                 this.pressure = pressure;
         }
 

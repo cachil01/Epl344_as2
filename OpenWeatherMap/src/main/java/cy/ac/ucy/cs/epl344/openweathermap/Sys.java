@@ -2,12 +2,20 @@ package cy.ac.ucy.cs.epl344.openweathermap;
 
 public class Sys {
 
+	private String pod;
 	private int type;
 	private int id;
 	private float message;
 	private String country;
 	private long sunrise;
 	private long sunset;
+
+	public String getPod(){
+		return pod;
+	}
+	public void setPop(String pod){
+		this.pod = pod;
+	}
 
 	public int getType() {
 		return type;

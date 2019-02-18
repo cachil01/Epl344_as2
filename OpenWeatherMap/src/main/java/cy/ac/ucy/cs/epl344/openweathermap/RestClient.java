@@ -27,7 +27,7 @@ public class RestClient {
 	}
 
 	public void getWeatherForecast(String city) {
-		WebTarget target = webTarget.path("data").path("2.5").path("weather").queryParam("q", city).queryParam("units","metric").queryParam("APPID", APPID);
+		WebTarget target = webTarget.path("data").path("2.5").path("forecast").queryParam("q", city).queryParam("units","metric").queryParam("APPID", APPID);
 		// Prepare HTTP GET request 
 		Builder builder = target.request();
 		// define accepted media types
@@ -35,18 +35,26 @@ public class RestClient {
 		Response response = builder.get();
 		
 		String body = response.readEntity(String.class);
+		//System.out.println(body);
 		// for testing: print whole json in beautified format
-		//Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		//CurrentWeather currWeather = gson.fromJson(body, CurrentWeather.class);
-		//System.out.println(gson.toJson(currWeather));
+		//Gson gson2 = new GsonBuilder().setPrettyPrinting().create();
+		//CurrentWeather currWeather2 = gson2.fromJson(body, CurrentWeather.class);
+		//System.out.println(gson2.toJson(currWeather2));
 		
 		// create gson object
 		Gson gsonObj = new Gson();
 		// parse json string and load it into CurrentWeather class 
-		CurrentWeather currWeather = gsonObj.fromJson(body, CurrentWeather.class);
+		WeatherForecast weathForecast = gsonObj.fromJson(body, WeatherForecast.class);
 		Gson gsonObj2 = new GsonBuilder().setPrettyPrinting().create();
-		System.out.println(gsonObj2.toJson(currWeather.getWeather().get(0)));
-		System.out.println(gsonObj2.toJson(currWeather.getMain()));
+		
+		//System.out.println(gsonObj2.toJson(weathForecast.getCity()));
+		//System.out.println(gsonObj2.toJson(weathForecast.getCod()));
+		//System.out.println(gsonObj2.toJson(weathForecast.getMessage()));
+		//System.out.println(gsonObj2.toJson(weathForecast.getCnt()));
+		System.out.println(gsonObj2.toJson(weathForecast.getList().get(0).getWeather()));
+		System.out.println(gsonObj2.toJson(weathForecast.getList().get(1).getWeather()));
+		//System.out.println(gsonObj2.toJson(weathForecast.getWeather().get(1)));
+		//System.out.println(gsonObj2.toJson(weathForecast.getMain()));
     	}
 
 	public void getCurrentWeather(String city) {
